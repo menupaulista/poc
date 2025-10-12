@@ -15,12 +15,9 @@ import argparse
 import asyncio
 import logging
 
+from poc.src.app.partners.doisporum.parser import DoisPorUmScraper
 from src.clients.httpx_client import AsyncHttpxClient
-from src.parsers.list_parser import DoisPorUmListPageParser
-from src.parsers.detail_parser import DoisPorUmDetailParser
 from src.repositories.pandas_repository import PandasOfferRepository
-from src.services.link_collector import LinkCollector
-from src.services.detail_scraper import DetailScraper
 from src.services.coordinator import ScrapeCoordinator
 
 
@@ -91,14 +88,10 @@ async def main():
         user_agent=args.user_agent,
     )
 
-    list_parser = DoisPorUmListPageParser()
-    detail_parser = DoisPorUmDetailParser()
+    scraper = DoisPorUmScraper.default(async_http_client=http_client)
+
     repository = PandasOfferRepository()
-
-    link_collector = LinkCollector(http_client, list_parser)
-    detail_scraper = DetailScraper(http_client, detail_parser, args.max_concurrency)
-
-    coordinator = ScrapeCoordinator(link_collector, detail_scraper, repository)
+    coordinator = ScrapeCoordinator(scraper=scraper, repository=repository)
 
     # Run the scraping process
     await coordinator.run(

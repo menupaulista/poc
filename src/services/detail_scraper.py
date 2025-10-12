@@ -5,18 +5,19 @@ from typing import List, Optional
 
 from tqdm.asyncio import tqdm
 
-from src.models.offer import OfferItem
-from src.protocols.base import HttpClient, DetailParser
+from poc.src.models.offer import OfferItem
+from poc.src.parsers.base_parser import DetailParser
+from poc.src.protocols.base import HttpClient
 
 
 class DetailScraper:
     """Service for scraping detail pages with concurrency control."""
 
     def __init__(
-        self,
-        http_client: HttpClient,
-        detail_parser: DetailParser,
-        max_concurrency: int = 6,
+            self,
+            http_client: HttpClient,
+            detail_parser: DetailParser,
+            max_concurrency: int = 6,
     ):
         self.http_client = http_client
         self.detail_parser = detail_parser

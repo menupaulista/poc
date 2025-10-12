@@ -9,8 +9,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from src.clients.httpx_client import AsyncHttpxClient
-from src.parsers.list_parser import DoisPorUmListPageParser
-from src.parsers.detail_parser import DoisPorUmDetailParser
+from poc.src.app.partners.doisporum.list_parser import DoisPorUmListPageParser
+from poc.src.app.partners.doisporum.detail_parser import DoisPorUmDetailParser
 from src.repositories.pandas_repository import PandasOfferRepository
 from src.services.link_collector import LinkCollector
 from src.services.detail_scraper import DetailScraper
