@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
-from src.config import BASE_URL, DETAIL_HREF_PATTERN, PAGINATION_TEXTS
+from poc.src.config import BASE_URL, DETAIL_HREF_PATTERN, PAGINATION_TEXTS
 
 
 class DoisPorUmListPageParser:

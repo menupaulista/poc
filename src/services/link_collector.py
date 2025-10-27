@@ -3,7 +3,8 @@
 import logging
 from typing import List
 
-from src.protocols.base import HttpClient, ListPageParser
+from poc.src.parsers.base_parser import ListPageParser
+from poc.src.protocols.base import HttpClient
 
 
 class LinkCollector:

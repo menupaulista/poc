@@ -6,14 +6,14 @@ from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
-from src.config import (
+from poc.src.config import (
     BASE_URL,
     PHONE_PATTERN,
     CEP_PATTERN,
     ADDRESS_INDICATORS,
     OFFER_KEYWORDS,
 )
-from src.models.offer import OfferItem
+from poc.src.models.offer import OfferItem
 
 
 class DoisPorUmDetailParser:
@@ -110,9 +110,9 @@ class DoisPorUmDetailParser:
 
         for block in blocks:
             if (
-                len(block) > 120
-                and not re.match(r"^oferta\b", block, re.IGNORECASE)
-                and not re.search(OFFER_KEYWORDS, block, re.IGNORECASE)
+                    len(block) > 120
+                    and not re.match(r"^oferta\b", block, re.IGNORECASE)
+                    and not re.search(OFFER_KEYWORDS, block, re.IGNORECASE)
             ):
                 long_blocks.append(block)
 
@@ -124,7 +124,7 @@ class DoisPorUmDetailParser:
         non_offer_blocks = []
         for block in blocks:
             if not re.match(r"^oferta\b", block, re.IGNORECASE) and not re.search(
-                OFFER_KEYWORDS, block, re.IGNORECASE
+                    OFFER_KEYWORDS, block, re.IGNORECASE
             ):
                 non_offer_blocks.append(block)
 
@@ -166,7 +166,7 @@ class DoisPorUmDetailParser:
         address_blocks = []
         for block in blocks:
             if (
-                re.search(ADDRESS_INDICATORS, block, re.IGNORECASE) and len(block) < 150
+                    re.search(ADDRESS_INDICATORS, block, re.IGNORECASE) and len(block) < 150
             ):  # Consistent limit
                 address_blocks.append(block)
 
@@ -185,7 +185,7 @@ class DoisPorUmDetailParser:
         address_blocks = []
         for block in blocks:
             if re.search(CEP_PATTERN, block) or re.search(
-                ADDRESS_INDICATORS, block, re.IGNORECASE
+                    ADDRESS_INDICATORS, block, re.IGNORECASE
             ):
                 address_blocks.append(block)
 
